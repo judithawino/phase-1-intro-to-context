@@ -14,6 +14,13 @@ let createEmployeeRecord = function(arr){
     }
 }
 
+//function takes in an array of arrays i.e multidimensional array for instance employeeData=[[],[]]
 let createEmployeeRecords= function(employeeData){
-    
+    //The map() method creates a new array populated with the results of calling a provided function on every element in the calling array
+    return employeeData.map(function(arr){
+        return createEmployeeRecord(arr)
+    })
+
 }
+
+
