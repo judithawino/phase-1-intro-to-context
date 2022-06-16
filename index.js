@@ -23,4 +23,46 @@ let createEmployeeRecords= function(employeeData){
 
 }
 
+let createTimeInEvent = function(employeeRecordObject, dateStamp){
+    let [date,hour] = dateStamp.split(' ')
+    employeeRecordObject.timeInEvents.push({
+        type: "TimeIn",
+        hour:parseInt(hour,10),
+        date,
+    })
+    return employeeRecordObject
+
+}
+
+let createTimeOutEvent= function(employeeRecordObject,dateStamp){
+    let [date,hour] = dateStamp.split(' ')
+    employeeRecordObject.timeOutEvents.push({
+        type:"TimeOut",
+        hour:parseInt(hour,10),
+        date,
+    })
+    return employeeRecordObject
+}
+
+let hoursWorkedOnDate = function(employee, soughtDate){
+    let inEvent = employee.timeInEvents.find(function(e){
+        return e.date === soughtDate
+    })
+
+    let outEvent = employee.timeOutEvents.find(function(e){
+        return e.date === soughtDate
+    })
+
+    return (outEvent.hour - inEvent.hour) / 100
+}
+
+let wagesEarnedOnDate = function(employee, dateSought){
+    let rawWage = hoursWorkedOnDate(employee, dateSought)
+        * employee.payPerHour
+    return parseFloat(rawWage.toString())
+}
+
+
+
+
 
